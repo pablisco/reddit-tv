@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:meta/meta.dart';
 
 part 'video_feed.g.dart';
 
@@ -10,7 +11,10 @@ abstract class Listing implements Built<Listing, ListingBuilder> {
   @nullable
   String get after;
 
-  factory Listing({List<Thing> children, String after}) =>
+  factory Listing({
+    @required List<Thing> children,
+    @required String after,
+  }) =>
       _$Listing._(children: BuiltList(children), after: after);
 
   factory Listing.fromJson(Map<String, dynamic> json) => Listing(
@@ -50,9 +54,9 @@ abstract class Comment extends Thing implements Built<Comment, CommentBuilder> {
   String get authorName;
 
   factory Comment({
-    String body,
-    String htmlBody,
-    String authorName,
+    @required String body,
+    @required String htmlBody,
+    @required String authorName,
   }) =>
       _$Comment._(
         body: body,
@@ -82,11 +86,11 @@ abstract class Post extends Thing implements Built<Post, PostBuilder> {
   String get permalink;
 
   factory Post({
-    String title,
-    Preview preview,
-    int ups,
-    int commentCount,
-    String permalink,
+    @required String title,
+    @required Preview preview,
+    @required int ups,
+    @required int commentCount,
+    @required String permalink,
   }) =>
       _$Post._(
         title: title,
@@ -146,7 +150,10 @@ abstract class Image implements Built<Image, ImageBuilder> {
 
   List<ImagePath> get all => [source]..addAll(resolutions);
 
-  factory Image({ImagePath source, List<ImagePath> resolutions}) =>
+  factory Image({
+    @required ImagePath source,
+    @required List<ImagePath> resolutions,
+  }) =>
       _$Image._(source: source, resolutions: BuiltList(resolutions));
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
@@ -168,9 +175,9 @@ abstract class ImagePath implements Built<ImagePath, ImagePathBuilder> {
   int get height;
 
   factory ImagePath({
-    String url,
-    int width,
-    int height,
+    @required String url,
+    @required int width,
+    @required int height,
   }) =>
       _$ImagePath._(
         url: url,

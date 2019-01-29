@@ -101,14 +101,19 @@ class VideoPreview extends StatelessWidget {
 
 enum VideoAction { Share, Comments, Ups, OpenExternal }
 
+typedef OnActionSelected = Function(VideoAction action);
+
 class VideoActionBar extends StatelessWidget {
   final List<VideoAction> actions;
   final Post post;
-  final Function(VideoAction action) onSelected;
+  final OnActionSelected onSelected;
 
-  const VideoActionBar(
-      {Key key, @required this.actions, @required this.post, this.onSelected})
-      : super(key: key);
+  VideoActionBar({
+    Key key,
+    @required this.actions,
+    @required this.post,
+    this.onSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Row(
@@ -127,20 +132,14 @@ class VideoActionBar extends StatelessWidget {
         }).toList(),
       );
 
-  onPressed(VideoAction action) => () {
-        if (onSelected != null) {
-          onSelected(action);
-        }
-      };
-
   Widget _shareActionButton(Post item) => FlatButton.icon(
-        onPressed: onPressed(VideoAction.Share),
+        onPressed: onSelected?.call(VideoAction.Share),
         icon: Icon(MdiIcons.share),
         label: Text('Share'),
       );
 
   Widget _commentsActionButton(Post item) => FlatButton.icon(
-        onPressed: onPressed(VideoAction.Comments),
+        onPressed: onSelected?.call(VideoAction.Comments),
         icon: Icon(MdiIcons.messageReply),
         label: Text(
           item.commentCount.toString(),
@@ -148,7 +147,7 @@ class VideoActionBar extends StatelessWidget {
       );
 
   Widget _upActionButton(Post item) => FlatButton.icon(
-        onPressed: onPressed(VideoAction.Ups),
+        onPressed: onSelected?.call(VideoAction.Ups),
         icon: Icon(MdiIcons.arrowUpBold),
         label: Text(
           item.ups.toString(),
@@ -156,7 +155,7 @@ class VideoActionBar extends StatelessWidget {
       );
 
   Widget _openExternalActionButton(Post item) => FlatButton.icon(
-        onPressed: onPressed(VideoAction.OpenExternal),
+        onPressed: onSelected?.call(VideoAction.OpenExternal),
         icon: Icon(MdiIcons.openInNew),
         label: Text(
           'Open',
