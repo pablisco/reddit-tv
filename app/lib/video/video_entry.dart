@@ -53,19 +53,20 @@ class VideoAppBar extends StatelessWidget implements PreferredSizeWidget {
       VideoAppBar(post, MediaQuery.of(context).size.width);
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-        top: true,
-        child: Stack(
-          children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: VideoPreview(_post.preview),
-            ),
-            AppBarShadow(),
-            BackButton(
-              color: Colors.white,
-            ),
-          ],
+  Widget build(BuildContext context) => Container(
+      decoration: BoxDecoration(color: Theme.of(context).primaryColorDark),
+        child: SafeArea(
+          top: true,
+          child: Stack(
+            children: [
+              AspectRatio(
+                child: VideoPreview(_post.preview),
+                aspectRatio: 16 / 9,
+              ),
+              AppBarShadow(),
+              BackButton(color: Colors.white),
+            ],
+          ),
         ),
       );
 }
