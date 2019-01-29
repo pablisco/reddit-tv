@@ -8,7 +8,7 @@ class Navigation {
   Navigation(this.repository);
 
   gotToVideo(BuildContext context, Post post, String tag) {
-    _goto(context, () => VideoPage(post, tag, loadComments : repository.loadComments));
+    _goto(context, () => VideoPage(post, loadComments : repository.loadComments));
   }
 
   _goto(BuildContext context, Widget createPage()) {

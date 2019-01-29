@@ -2,16 +2,13 @@ import 'package:app/data/remote/video_feed.dart';
 import 'package:app/video/video_entry.dart';
 import 'package:flutter/material.dart';
 
-@immutable
 class VideoPage extends StatefulWidget {
   final Future<Listing> Function(Post post) loadComments;
 
   final Post _post;
-  final String _tag;
 
   VideoPage(
-    this._post,
-    this._tag, {
+    this._post, {
     Key key,
     @required this.loadComments,
   }) : super(key: key);
@@ -58,7 +55,9 @@ class _VideoPageState extends State<VideoPage> {
 
   Widget contentWidget() {
     if (content == null) {
-      return Center(child: CircularProgressIndicator());
+      return Expanded(
+        child: Center(child: CircularProgressIndicator()),
+      );
     } else {
       return Expanded(
         child: ListView.separated(
