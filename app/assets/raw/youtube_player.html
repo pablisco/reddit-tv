@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- based on: https://raw.githubusercontent.com/PierfrancescoSoffritti/android-youtube-player/master/core/src/main/res/raw/youtube_player.html -->
+<html lang="en">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            overflow: hidden;
+            position: fixed;
+        }
+    </style>
+
+    <head title="Youtube Player">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <script src="https://www.youtube.com/iframe_api"></script>
+    </head>
+
+    <body>
+        <div id="youTubePlayerDOM"></div>
+    </body>
+
+    <script type="text/javascript">
+
+        var player;
+
+        // noinspection JSUnusedLocalSymbols
+        function onYouTubeIframeAPIReady() {
+
+            player = new YT.Player('youTubePlayerDOM', {
+                height: '100%',
+                width: '100%',
+                videoId: '%videoId%',
+                playerVars: 'injectedPlayerVars'
+            });
+        }
+
+    </script>
+</html>

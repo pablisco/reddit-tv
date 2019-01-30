@@ -223,12 +223,22 @@ class _$Post extends Post {
   final int commentCount;
   @override
   final String permalink;
+  @override
+  final String url;
+  @override
+  final String mediaType;
 
   factory _$Post([void updates(PostBuilder b)]) =>
       (new PostBuilder()..update(updates)).build();
 
   _$Post._(
-      {this.title, this.preview, this.ups, this.commentCount, this.permalink})
+      {this.title,
+      this.preview,
+      this.ups,
+      this.commentCount,
+      this.permalink,
+      this.url,
+      this.mediaType})
       : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('Post', 'title');
@@ -244,6 +254,12 @@ class _$Post extends Post {
     }
     if (permalink == null) {
       throw new BuiltValueNullFieldError('Post', 'permalink');
+    }
+    if (url == null) {
+      throw new BuiltValueNullFieldError('Post', 'url');
+    }
+    if (mediaType == null) {
+      throw new BuiltValueNullFieldError('Post', 'mediaType');
     }
   }
 
@@ -262,15 +278,23 @@ class _$Post extends Post {
         preview == other.preview &&
         ups == other.ups &&
         commentCount == other.commentCount &&
-        permalink == other.permalink;
+        permalink == other.permalink &&
+        url == other.url &&
+        mediaType == other.mediaType;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, title.hashCode), preview.hashCode), ups.hashCode),
-            commentCount.hashCode),
-        permalink.hashCode));
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, title.hashCode), preview.hashCode),
+                        ups.hashCode),
+                    commentCount.hashCode),
+                permalink.hashCode),
+            url.hashCode),
+        mediaType.hashCode));
   }
 
   @override
@@ -280,7 +304,9 @@ class _$Post extends Post {
           ..add('preview', preview)
           ..add('ups', ups)
           ..add('commentCount', commentCount)
-          ..add('permalink', permalink))
+          ..add('permalink', permalink)
+          ..add('url', url)
+          ..add('mediaType', mediaType))
         .toString();
   }
 }
@@ -308,6 +334,14 @@ class PostBuilder implements Builder<Post, PostBuilder> {
   String get permalink => _$this._permalink;
   set permalink(String permalink) => _$this._permalink = permalink;
 
+  String _url;
+  String get url => _$this._url;
+  set url(String url) => _$this._url = url;
+
+  String _mediaType;
+  String get mediaType => _$this._mediaType;
+  set mediaType(String mediaType) => _$this._mediaType = mediaType;
+
   PostBuilder();
 
   PostBuilder get _$this {
@@ -317,6 +351,8 @@ class PostBuilder implements Builder<Post, PostBuilder> {
       _ups = _$v.ups;
       _commentCount = _$v.commentCount;
       _permalink = _$v.permalink;
+      _url = _$v.url;
+      _mediaType = _$v.mediaType;
       _$v = null;
     }
     return this;
@@ -345,7 +381,9 @@ class PostBuilder implements Builder<Post, PostBuilder> {
               preview: preview.build(),
               ups: ups,
               commentCount: commentCount,
-              permalink: permalink);
+              permalink: permalink,
+              url: url,
+              mediaType: mediaType);
     } catch (_) {
       String _$failedField;
       try {

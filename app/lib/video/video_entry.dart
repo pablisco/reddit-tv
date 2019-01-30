@@ -1,5 +1,6 @@
 import 'package:app/data/repository.dart';
 import 'package:app/style/styles.dart';
+import 'package:app/video/youtube_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -54,21 +55,28 @@ class VideoAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-      decoration: BoxDecoration(color: Theme.of(context).primaryColorDark),
+        decoration: BoxDecoration(color: Theme.of(context).primaryColorDark),
         child: SafeArea(
           top: true,
           child: Stack(
             children: [
-              AspectRatio(
-                child: VideoPreview(_post.preview),
-                aspectRatio: 16 / 9,
-              ),
+              VideoPreview(_post.preview),
+              _loadingIndicator(),
+              YoutubePlayer.fromUrl(_post.url),
               AppBarShadow(),
               BackButton(color: Colors.white),
             ],
           ),
         ),
       );
+
+  Widget _loadingIndicator() => AspectRatio(
+    aspectRatio: 16 / 9,
+    child: Center(
+      child: CircularProgressIndicator(),
+    ),
+  );
+
 }
 
 class AppBarShadow extends StatelessWidget {
@@ -93,9 +101,12 @@ class VideoPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Hero(
         tag: _preview,
-        child: material.Image.network(
-          _preview.bestPathFor(width: MediaQuery.of(context).size.width)?.url,
-          fit: BoxFit.fitWidth,
+        child: AspectRatio(
+          child: material.Image.network(
+            _preview.bestPathFor(width: MediaQuery.of(context).size.width)?.url,
+            fit: BoxFit.fitWidth,
+          ),
+          aspectRatio: 16 / 9,
         ),
       );
 }

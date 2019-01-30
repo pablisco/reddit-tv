@@ -85,12 +85,18 @@ abstract class Post extends Thing implements Built<Post, PostBuilder> {
 
   String get permalink;
 
+  String get url;
+
+  String get mediaType;
+
   factory Post({
     @required String title,
     @required Preview preview,
     @required int ups,
     @required int commentCount,
     @required String permalink,
+    @required String url,
+    @required String mediaType,
   }) =>
       _$Post._(
         title: title,
@@ -98,6 +104,8 @@ abstract class Post extends Thing implements Built<Post, PostBuilder> {
         ups: ups,
         commentCount: commentCount,
         permalink: permalink,
+        url: url,
+        mediaType: mediaType,
       );
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -106,6 +114,8 @@ abstract class Post extends Thing implements Built<Post, PostBuilder> {
         ups: json['ups'],
         commentCount: json['num_comments'],
         permalink: json['permalink'],
+        url: json['url'],
+        mediaType: json['media']['type'],
       );
 
   Post._() : super._();
